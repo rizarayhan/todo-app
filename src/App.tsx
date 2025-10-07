@@ -1,28 +1,27 @@
-import { useState } from "react";
-import TodoItem from "./components/TodoItem";
-import { dummyData } from "./data/todos";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
+import TodoSummary from "./components/TodoSummary";
+import useTodos from "./hooks/useTodos";
 
 function App() {
-  const [todos, setTodos] = useState(dummyData);
-
-  function handleCompletedChange(id: number, completed: boolean) {
-    setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? { ...todo, completed } : todo)));
-  }
+  const { todos, addTodo, setCompletedChange, deleteTodo, deleteAllCompletedTodos } = useTodos();
 
   return (
-    <main className="py-10 h-screen space-y-5">
+    <main className="py-10 h-screen space-y-5 overflow-y-auto">
       <h1 className="font-bold text-3xl text-center">Your Todos</h1>
-      <div className="max-w-lg mx-auto bg-slate-100 rounded-md p-5">
-        <div className="space-y-2">
-          {todos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              onCompletedChange={handleCompletedChange}
-            />
-          ))}
-        </div>
+      <div className="max-w-lg mx-auto bg-slate-100 rounded-md p-5 space-y-6">
+        <AddTodo onSubmit={addTodo} />
+        <TodoList
+          todos={todos}
+          onCompletedChange={setCompletedChange}
+          onDelete={deleteTodo}
+        />
       </div>
+      Z
+      <TodoSummary
+        todos={todos}
+        deleteAllCompleted={deleteAllCompletedTodos}
+      />
     </main>
   );
 }
