@@ -4,7 +4,7 @@ import TodoSummary from "./components/TodoSummary";
 import useTodos from "./hooks/useTodos";
 
 function App() {
-  const { todos, addTodo, setCompletedChange, deleteTodo, deleteAllCompletedTodos } = useTodos();
+  const { todos, addTodo, setCompletedChange, editTodo, deleteTodo, deleteAllCompletedTodos } = useTodos();
 
   return (
     <main className="py-10 h-screen space-y-5 overflow-y-auto">
@@ -14,6 +14,7 @@ function App() {
         <TodoList
           todos={todos}
           onCompletedChange={setCompletedChange}
+          onEdit={editTodo}
           onDelete={deleteTodo}
         />
       </div>
