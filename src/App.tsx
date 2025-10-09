@@ -18,7 +18,6 @@ function App() {
           onDelete={deleteTodo}
         />
       </div>
-      Z
       <TodoSummary
         todos={todos}
         deleteAllCompleted={deleteAllCompletedTodos}
